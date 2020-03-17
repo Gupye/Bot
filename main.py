@@ -1,44 +1,18 @@
 import telebot
 from telebot import apihelper
 
-from proxy import get_proxies
 
 
-def start_bot(ser, port):
-    PROXY = str(f'socks5://{ser}:{port}')
-    apihelper.proxy = {'https': PROXY}
 
-
-bot = telebot.TeleBot('1048945938:AAHX_0SBJJhwaXkzj-n7OxlFlsxaK6vvFHU')
 
 onwork = False
+# main_start()
 
 
-def cycle_proxy(list_proxy):
-    for i in range(1, len(list_proxy) - 1):
-        ser = str(list_proxy[i]['server'])
-        port = str(list_proxy[i]['port'])
-        try:
-            start_bot(ser, port)
-            break
-        except:
-            continue
+PROXY = 'socks5://127.0.0.1:9150'
+apihelper.proxy = {'https': PROXY}
+bot = telebot.TeleBot('1048945938:AAHX_0SBJJhwaXkzj-n7OxlFlsxaK6vvFHU')
 
-
-def proxies():
-    list_proxy = get_proxies()
-    return list_proxy
-
-
-def main_start():
-    list_proxy = proxies()
-    i = 0
-    ser = str(list_proxy[i]['server'])
-    port = str(list_proxy[i]['port'])
-    try:
-        start_bot(ser, port)
-    except:
-        cycle_proxy(list_proxy)
 
 
 @bot.message_handler(commands=['start'])
@@ -49,6 +23,7 @@ def start_message(message):
 @bot.message_handler(content_types=['text'])
 def send_text(message):
     global onwork
+    print(message.chat.username, 'написал', message.text.lower())
     if message.text.lower() == 'тест':
         a = message.chat.username
         bot.send_message(message.chat.id, a)
@@ -80,5 +55,9 @@ def send_text(message):
         else:
             bot.send_message(message.chat.id, 'Ты не зарегался')
 
+try:
+    bot.polling()
+    print('работает')
+except:
+    print ('пиздец')
 
-bot.polling()
