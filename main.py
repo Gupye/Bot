@@ -1,18 +1,14 @@
 import telebot
 from telebot import apihelper
-
-
-
-
+from proxy_Tor import start_tor
 
 onwork = False
-# main_start()
 
+start_tor()
 
 PROXY = 'socks5://127.0.0.1:9150'
 apihelper.proxy = {'https': PROXY}
 bot = telebot.TeleBot('1048945938:AAHX_0SBJJhwaXkzj-n7OxlFlsxaK6vvFHU')
-
 
 
 @bot.message_handler(commands=['start'])
@@ -55,9 +51,9 @@ def send_text(message):
         else:
             bot.send_message(message.chat.id, 'Ты не зарегался')
 
+
 try:
     bot.polling()
     print('работает')
 except:
-    print ('пиздец')
-
+    print('пиздец')

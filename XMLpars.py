@@ -1,7 +1,4 @@
-import sys
 from bs4 import BeautifulSoup
-import lxml
-
 
 count = int(0)
 operation = str(open('response.xml', 'r', encoding="utf-8").read())
