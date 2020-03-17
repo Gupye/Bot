@@ -1,15 +1,12 @@
 from time import sleep
-
-import telebot
-
-from proxy_Tor import start_tor
 import start_bot
 
 onwork = False
 wait = 15
-# start_tor()
-# bot = start_bot.start()
-bot = telebot.TeleBot('1048945938:AAHX_0SBJJhwaXkzj-n7OxlFlsxaK6vvFHU')
+
+# bot = telebot.TeleBot('1048945938:AAHX_0SBJJhwaXkzj-n7OxlFlsxaK6vvFHU')
+
+bot = start_bot.start()
 
 
 @bot.message_handler(commands=['start'])
@@ -61,7 +58,6 @@ def send_text(message):
             bot.send_message(message.chat.id, 'Ты не зарегался')
 
 
-b = '445120756'
 
 try:
     print('пулинг')
