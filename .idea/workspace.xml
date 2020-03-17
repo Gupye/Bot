@@ -2,10 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ca1c21b9-05ba-4996-a4b6-1aa80a1bf561" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/proxy_Tor.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/start_bot.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test 2.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/XMLpars.py" beforeDir="false" afterPath="$PROJECT_DIR$/XMLpars.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proxy_Tor.py" beforeDir="false" afterPath="$PROJECT_DIR$/proxy_Tor.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/test.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,29 +49,7 @@
       <recent name="C:\Users\HP Probook4320s\PycharmProjects\Bot" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.main">
-    <configuration name="XMLpars (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="Bot" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/XMLpars.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
+  <component name="RunManager" selected="Python.test 2">
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Bot" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -136,6 +116,28 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="test 2" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Bot" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test 2.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="test" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Bot" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -161,10 +163,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.main" />
+        <item itemvalue="Python.test 2" />
+        <item itemvalue="Python.test" />
         <item itemvalue="Python.proxy_Tor" />
         <item itemvalue="Python.proxy_hide_my_name" />
-        <item itemvalue="Python.XMLpars (1)" />
-        <item itemvalue="Python.test" />
       </list>
     </recent_temporary>
   </component>
@@ -190,7 +192,7 @@
       <workItem from="1584091177636" duration="6955000" />
       <workItem from="1584340296276" duration="15458000" />
       <workItem from="1584371266654" duration="1292000" />
-      <workItem from="1584428836544" duration="6119000" />
+      <workItem from="1584428836544" duration="12657000" />
     </task>
     <servers />
   </component>
@@ -210,22 +212,22 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="740" y="274" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1584436101138" />
-    <state width="1860" height="301" key="GridCell.Tab.0.bottom" timestamp="1584436571959">
+    <state width="1876" height="301" key="GridCell.Tab.0.bottom" timestamp="1584454002554">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1860" height="301" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1584436571959" />
-    <state width="1860" height="301" key="GridCell.Tab.0.center" timestamp="1584436571959">
+    <state width="1876" height="301" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1584454002554" />
+    <state width="1876" height="301" key="GridCell.Tab.0.center" timestamp="1584454002554">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1860" height="301" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1584436571959" />
-    <state width="1860" height="301" key="GridCell.Tab.0.left" timestamp="1584436571959">
+    <state width="1876" height="301" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1584454002554" />
+    <state width="1876" height="301" key="GridCell.Tab.0.left" timestamp="1584454002553">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1860" height="301" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1584436571959" />
-    <state width="1860" height="301" key="GridCell.Tab.0.right" timestamp="1584436571959">
+    <state width="1876" height="301" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1584454002553" />
+    <state width="1876" height="301" key="GridCell.Tab.0.right" timestamp="1584454002554">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1860" height="301" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1584436571959" />
+    <state width="1876" height="301" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1584454002554" />
     <state width="1876" height="342" key="GridCell.Tab.1.bottom" timestamp="1583853948293">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -256,7 +258,8 @@
     <SUITE FILE_PATH="coverage/Bot$XMLpars__1_.coverage" NAME="XMLpars (1) Coverage Results" MODIFIED="1584361865092" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Bot$main_viber.coverage" NAME="main_viber Coverage Results" MODIFIED="1583228956060" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Bot$proxy_hide_my_name.coverage" NAME="proxy_hide_my_name Coverage Results" MODIFIED="1584434352065" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/Bot$main.coverage" NAME="main Coverage Results" MODIFIED="1584436571943" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/Bot$test.coverage" NAME="test Coverage Results" MODIFIED="1584099428191" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Bot$test_2.coverage" NAME="test 2 Coverage Results" MODIFIED="1584444903194" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Bot$main.coverage" NAME="main Coverage Results" MODIFIED="1584454002531" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Bot$test.coverage" NAME="test Coverage Results" MODIFIED="1584442658691" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

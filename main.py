@@ -1,13 +1,14 @@
+from time import sleep
+
 import telebot
-from telebot import apihelper
+
 from proxy_Tor import start_tor
+import start_bot
 
 onwork = False
-
-start_tor()
-
-PROXY = 'socks5://127.0.0.1:9150'
-apihelper.proxy = {'https': PROXY}
+wait = 15
+# start_tor()
+# bot = start_bot.start()
 bot = telebot.TeleBot('1048945938:AAHX_0SBJJhwaXkzj-n7OxlFlsxaK6vvFHU')
 
 
@@ -16,12 +17,20 @@ def start_message(message):
     bot.send_message(message.chat.id, 'Привет, ты написал мне /start')
 
 
+@bot.message_handler(commands=['test'])
+def send_text1(message):
+    global wait
+    while True:
+        bot.send_message(message.chat.id, 'каждые три секунды')
+        sleep(wait)
+
+
 @bot.message_handler(content_types=['text'])
 def send_text(message):
     global onwork
     print(message.chat.username, 'написал', message.text.lower())
     if message.text.lower() == 'тест':
-        a = message.chat.username
+        a = message.chat.id
         bot.send_message(message.chat.id, a)
     elif message.text.lower() == 'пока':
         bot.send_message(message.chat.id, 'Прощай, создатель')
@@ -52,8 +61,10 @@ def send_text(message):
             bot.send_message(message.chat.id, 'Ты не зарегался')
 
 
+b = '445120756'
+
 try:
+    print('пулинг')
     bot.polling()
-    print('работает')
 except:
     print('пиздец')
