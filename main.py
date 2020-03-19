@@ -1,11 +1,13 @@
 from time import sleep
+
+import proxy_Tor
 import start_bot
 
 onwork = False
 wait = 15
 
 # bot = telebot.TeleBot('1048945938:AAHX_0SBJJhwaXkzj-n7OxlFlsxaK6vvFHU')
-
+proxy_Tor.start_tor()
 bot = start_bot.start()
 
 
