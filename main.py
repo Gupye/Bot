@@ -48,8 +48,8 @@ def send_text(message):
     elif message.text.lower() == 'отчёт':  # Вывод меню для получения отчёта
         markup_report = types.ReplyKeyboardMarkup(row_width=2)
         markup_report.add('Отчёт->операции')
-        markup_report.add('Отчёт->сформировать')
         markup_report.add('Отчёт->скидки')
+        markup_report.add('Отчёт->сформировать')
         markup_report.add('Назад->')
         bot.send_message(message.chat.id, 'выберите тип отчёта', reply_markup=markup_report)
         menu_markup = 'markup_report'
