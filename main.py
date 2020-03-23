@@ -37,15 +37,18 @@ def send_text(message):
         bot.send_message(message.chat.id, 'Ты самая лучшая жена')
     elif message.text.lower() == 'создатель':
         bot.send_message(message.chat.id, 'Gupye, vk.com/gupye, +79788781055')
+    elif message.text.lower() == 'отчёт->сформировать':
+        xmlpars()
+        bot.send_message(message.chat.id, 'Отчёт сформирован')
     elif message.text.lower() == 'назад->':  # Вывод меню для получения отчёта
         if menu_markup == 'markup_report':
             bot.send_message(message.chat.id, 'назад ', reply_markup=markup_start)
         elif menu_markup == 'markup_start':
             bot.send_message(message.chat.id, 'это уже верхний уровень')
-
     elif message.text.lower() == 'отчёт':  # Вывод меню для получения отчёта
         markup_report = types.ReplyKeyboardMarkup(row_width=2)
         markup_report.add('Отчёт->операции')
+        markup_report.add('Отчёт->сформировать')
         markup_report.add('Отчёт->скидки')
         markup_report.add('Назад->')
         bot.send_message(message.chat.id, 'выберите тип отчёта', reply_markup=markup_report)
@@ -53,12 +56,18 @@ def send_text(message):
     elif message.text.lower() == 'отчёт->скидки' or message.text.lower() == 'отчет->скидки':  # Вывод отчёта по скидкам
         f = open('Скидки.txt', 'r', encoding="utf-8")
         a = f.read()
-        bot.send_message(message.chat.id, a)
+        if len(a)!=0:
+            bot.send_message(message.chat.id, a)
+        else:
+            bot.send_message(message.chat.id, 'Отчёт пуст')
         f.close()
     elif message.text.lower() == 'отчёт->операции' or message.text.lower() == 'отчет->операции':  # Вывод отчёта по операциям
         f = open('Операции.txt', 'r', encoding="utf-8")
         a = f.read()
-        bot.send_message(message.chat.id, a)
+        if len(a) != 0:
+            bot.send_message(message.chat.id, a)
+        else:
+            bot.send_message(message.chat.id, 'Отчёт пуст')
         f.close()
 
 

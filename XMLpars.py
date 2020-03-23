@@ -1,9 +1,17 @@
 from bs4 import BeautifulSoup
+import subprocess
 
 
 def xmlpars():
+    a = open('a/as1.bat').read()
+    print(a)
+    try:
+        subprocess.run(a, check=True, shell=True, cwd='a')
+        print('Отчёт взят')
+    except:
+        print('Не получилось взять отчёт')
     count = int(0)
-    operation = str(open('response.xml', 'r', encoding="utf-8").read())
+    operation = str(open('a/response.xml', 'r', encoding="utf-8").read())
     a = open('Операции.txt', 'w', encoding="utf-8")
     soup = BeautifulSoup(operation, 'lxml')
     operations = soup.find_all('row')
@@ -20,8 +28,9 @@ def xmlpars():
             lists.append(c)
 
     sort_list = sorted(lists)
-    for st in sort_list:
-        a.write(st)
+    if len(sort_list) != 0:
+        for st in sort_list:
+            a.write(st)
     lists = []
     sort_list = []
     count = int(0)
@@ -42,9 +51,11 @@ def xmlpars():
             lists.append(c)
 
     sort_list = sorted(lists)
-    for st in sort_list:
-        t.write(st)
+    if len(sort_list) != 0:
+        for st in sort_list:
+            t.write(st)
     t.close()
+    print('отчёт сформирован')
 
 
 if __name__ == '__main__':

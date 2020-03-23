@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RK7QueryResult ServerVersion="7.6.2.275" XmlVersion="244" NetName="SERVER_TEST" Status="Ok" Processed="1">
+	<CommandResult CMD="GetDocByLayout" Status="Ok" ErrorText="" DateTime="2020-03-23T17:30:09" WorkTime="78">
+		<LayoutResult LayoutCode="1000813" LayoutFilters="" DataSourceParams=""><Operations count = "24">
+<row orderguid="" orderident="0" datetime="23.03.2020 16:02:02" ordername="" operator="Кассир" shiftnum="19" operationid="Автоматическое закрытие визита" operation="Автоматическое закрытие визита" operatorid="Кассир"/>
+<row orderguid="" orderident="0" datetime="23.03.2020 16:09:20" ordername="" operator="Кассир" shiftnum="19" operationid="Автоматическое закрытие визита" operation="Автоматическое закрытие визита" operatorid="Кассир"/>
+<row orderguid="" orderident="0" datetime="23.03.2020 15:55:54" ordername="" operator="Кассир" shiftnum="19" operationid="Вход в систему по паролю" operation="Вход в систему по паролю" operatorid="Кассир"/>
+<row orderguid="" orderident="0" datetime="23.03.2020 16:01:32" ordername="" operator="Кассир" shiftnum="19" operationid="Вход в систему по паролю" operation="Вход в систему по паролю" operatorid="Кассир"/>
+<row orderguid="" orderident="0" datetime="23.03.2020 16:08:58" ordername="" operator="Кассир" shiftnum="19" operationid="Вход в систему по паролю" operation="Вход в систему по паролю" operatorid="Кассир"/>
+<row orderguid="{FE0EBA8B-85D3-44E0-A5DD-B7AF2EE03DF8}" orderident="256" datetime="23.03.2020 16:02:02" ordername="1169/1" operator="Кассир" shiftnum="19" operationid="Закрытие заказа" operation="Закрытие заказа" operatorid="Кассир"/>
+<row orderguid="{29C004C6-68A7-414C-B376-AD9DC53DB322}" orderident="256" datetime="23.03.2020 16:09:20" ordername="1170/1" operator="Кассир" shiftnum="19" operationid="Закрытие заказа" operation="Закрытие заказа" operatorid="Кассир"/>
+<row orderguid="{FE0EBA8B-85D3-44E0-A5DD-B7AF2EE03DF8}" orderident="256" datetime="23.03.2020 16:02:02" ordername="1169/1" operator="Кассир" shiftnum="19" operationid="Закрыть чек" operation="Закрыть чек" operatorid="Кассир"/>
+<row orderguid="{29C004C6-68A7-414C-B376-AD9DC53DB322}" orderident="256" datetime="23.03.2020 16:09:20" ordername="1170/1" operator="Кассир" shiftnum="19" operationid="Закрыть чек" operation="Закрыть чек" operatorid="Кассир"/>
+<row orderguid="{FE0EBA8B-85D3-44E0-A5DD-B7AF2EE03DF8}" orderident="256" datetime="23.03.2020 15:56:07" ordername="1169/1" operator="Кассир" shiftnum="19" operationid="Открывать свой заказ" operation="Открывать свой заказ" operatorid="Кассир"/>
+<row orderguid="{FE0EBA8B-85D3-44E0-A5DD-B7AF2EE03DF8}" orderident="256" datetime="23.03.2020 16:01:32" ordername="1169/1" operator="Кассир" shiftnum="19" operationid="Открывать свой заказ" operation="Открывать свой заказ" operatorid="Кассир"/>
+<row orderguid="{29C004C6-68A7-414C-B376-AD9DC53DB322}" orderident="256" datetime="23.03.2020 16:09:05" ordername="1170/1" operator="Кассир" shiftnum="19" operationid="Открывать свой заказ" operation="Открывать свой заказ" operatorid="Кассир"/>
+<row orderguid="" orderident="0" datetime="23.03.2020 14:10:12" ordername="" operator="Кассир" shiftnum="19" operationid="Отмена регистрации (конец сессии)" operation="Отмена регистрации (конец сессии)" operatorid="Кассир"/>
+<row orderguid="" orderident="0" datetime="23.03.2020 14:12:17" ordername="" operator="Кассир" shiftnum="19" operationid="Отмена регистрации (конец сессии)" operation="Отмена регистрации (конец сессии)" operatorid="Кассир"/>
+<row orderguid="{FE0EBA8B-85D3-44E0-A5DD-B7AF2EE03DF8}" orderident="256" datetime="23.03.2020 15:58:22" ordername="1169/1" operator="Кассир" shiftnum="19" operationid="Отмена регистрации (конец сессии)" operation="Отмена регистрации (конец сессии)" operatorid="Кассир"/>
+<row orderguid="" orderident="0" datetime="23.03.2020 16:04:02" ordername="" operator="Кассир" shiftnum="19" operationid="Отмена регистрации (конец сессии)" operation="Отмена регистрации (конец сессии)" operatorid="Кассир"/>
+<row orderguid="" orderident="0" datetime="23.03.2020 16:11:20" ordername="" operator="Кассир" shiftnum="19" operationid="Отмена регистрации (конец сессии)" operation="Отмена регистрации (конец сессии)" operatorid="Кассир"/>
+<row orderguid="" orderident="0" datetime="23.03.2020 14:10:12" ordername="" operator="Кассир" shiftnum="19" operationid="Отменить регистрацию работника" operation="Отменить регистрацию работника" operatorid="Кассир"/>
+<row orderguid="{FE0EBA8B-85D3-44E0-A5DD-B7AF2EE03DF8}" orderident="256" datetime="" ordername="1169/1" operator="Кассир" shiftnum="19" operationid="Расcчитать чек" operation="Расcчитать чек" operatorid="Кассир"/>
+<row orderguid="{29C004C6-68A7-414C-B376-AD9DC53DB322}" orderident="256" datetime="" ordername="1170/1" operator="Кассир" shiftnum="19" operationid="Расcчитать чек" operation="Расcчитать чек" operatorid="Кассир"/>
+<row orderguid="{FE0EBA8B-85D3-44E0-A5DD-B7AF2EE03DF8}" orderident="256" datetime="" ordername="1169/1" operator="Кассир" shiftnum="19" operationid="Скидка" operation="Скидка" operatorid="Кассир"/>
+<row orderguid="{29C004C6-68A7-414C-B376-AD9DC53DB322}" orderident="256" datetime="" ordername="1170/1" operator="Кассир" shiftnum="19" operationid="Скидка" operation="Скидка" operatorid="Кассир"/>
+<row orderguid="{FE0EBA8B-85D3-44E0-A5DD-B7AF2EE03DF8}" orderident="256" datetime="23.03.2020 15:56:07" ordername="1169/1" operator="Кассир" shiftnum="19" operationid="Создание заказа" operation="Создание заказа" operatorid="Кассир"/>
+<row orderguid="{29C004C6-68A7-414C-B376-AD9DC53DB322}" orderident="256" datetime="23.03.2020 16:09:05" ordername="1170/1" operator="Кассир" shiftnum="19" operationid="Создание заказа" operation="Создание заказа" operatorid="Кассир"/>
+</Operations>
+<Discounts count = "2">
+<Skidk author="Кассир" sum="-14.50" discount="10%" shiftnum1="19" chargesource="Вручную" shiftdate="23.03.2020"/>
+<Skidk author="Кассир" sum="-14.00" discount="10%" shiftnum1="19" chargesource="Вручную" shiftdate="23.03.2020"/>
+</Discounts>
+		</LayoutResult>
+	</CommandResult>
+</RK7QueryResult>
