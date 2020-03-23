@@ -14,7 +14,7 @@ def xmlpars():
             a.write('*****ОПЕРАЦИИ*****' + '\n')
             count = + 1
         if operation.get('datetime') != '':
-            print(operation.get('datetime'), operation.get('operation'), operation.get('operator'))
+            # print(operation.get('datetime'), operation.get('operation'), operation.get('operator'))
             c = str(
                 operation.get('datetime') + ' ' + operation.get('operation') + ' ' + operation.get('operator') + '\n')
             lists.append(c)
@@ -34,8 +34,8 @@ def xmlpars():
             t.write('*****СКИДКИ*****' + '\n')
             count = + 1
         if discount.get('discount') != 0:
-            print(discount.get('shiftdate'), discount.get('discount'), discount.get('author'), discount.get('sum'),
-                  discount.get('chargesource'))
+            # print(discount.get('shiftdate'), discount.get('discount'), discount.get('author'), discount.get('sum'),
+            #       discount.get('chargesource'))
             c = str(discount.get('shiftdate') + ' ' + discount.get('discount') + ' ' + discount.get(
                 'author') + ' ' + discount.get('sum') + ' ' + discount.get(
                 'chargesource') + '\n')
@@ -45,6 +45,7 @@ def xmlpars():
     for st in sort_list:
         t.write(st)
     t.close()
+
 
 if __name__ == '__main__':
     xmlpars()
