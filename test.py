@@ -1,5 +1,5 @@
-import subprocess
+import configparser
 
-a = open('a/as1.bat').read()
-print(a)
-subprocess.run(a, check=True, shell=True, cwd='a')
+config = configparser.ConfigParser()  # создаём объекта парсера
+config.read("settings.ini")  # читаем конфиг
+print(config['settings']['ip_addres'])
