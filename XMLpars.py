@@ -57,7 +57,7 @@ def xmlpars():
             if last_disc == '':
                 last_disc = operation.get('datetime')
             elif last_disc < operation.get('datetime'):
-                send_new_alarm(c)
+                # send_new_alarm(c)
                 last_disc = operation.get('datetime')
                 print('последнее время', last_disc)
         lists.append(c)

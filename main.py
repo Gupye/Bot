@@ -1,12 +1,16 @@
+import configparser
 import time
 import telebot
 from telebot import types
 import threading
 from bs4 import BeautifulSoup
 import subprocess
-from XMLpars import xmlpars
 
-bot = telebot.TeleBot('1048945938:AAHX_0SBJJhwaXkzj-n7OxlFlsxaK6vvFHU', threaded=True)  # Инициализация бота
+lock = threading.RLock()
+
+config = configparser.ConfigParser()  # создаём объекта парсера
+config.read("settings.ini")  # читаем конфиг
+bot = telebot.TeleBot(config['settings']['token'], threaded=True)  # Инициализация бота
 menu_markup = 'markup_report'
 markup_start = types.ReplyKeyboardMarkup(row_width=2)
 markup_start.add('Привет')
@@ -78,81 +82,82 @@ def send_text(message):
         menu_markup = 'markup_report'
 
     elif message.text.lower() == 'отписаться->скидки':
-        file = open('send_disc.txt', 'r', encoding='UTF-8')
-        mans = file.readlines()
+        with lock:
+            file = open('send_disc.txt', 'r', encoding='UTF-8')
+            mans = file.readlines()
+            file.close()
         del_man = str(message.chat.id)
         file.close()
-        if len(mans) > 1:
-            for i in range(0, len(mans) - 1):
+        if len(mans) > -1:
+            for i in range(0, len(mans)):
                 print(f'проверяем {mans[i]} с {del_man}')
-                if del_man == str(mans[i]).strip():
+                if del_man in str(mans[i]).strip():
                     del mans[i]
                     bot.send_message(message.chat.id, 'Вы отписались', reply_markup=markup_send_al)
-                    file = open('send_disc.txt', 'w', encoding='UTF-8')
-                    for man in mans:
-                        file.write(man)
                     break
-        elif len(mans) == 1:
-            if del_man == str(mans[0]).strip():
-                del mans[0]
-                bot.send_message(message.chat.id, 'Вы отписались', reply_markup=markup_send_al)
-                file = open('send_disc.txt', 'w', encoding='UTF-8')
-                for man in mans:
-                    file.write(man)
+        with lock:
+            file = open('send_disc.txt', 'w', encoding='UTF-8')
+            for man in mans:
+                file.write(man)
+            file.close()
 
     elif message.text.lower() == 'подписки-> скидки':
-        file = open('send_disc.txt', 'r', encoding='UTF-8')
-        mans = file.readlines()
-        file.close()
-        file = open('send_disc.txt', 'a', encoding='UTF-8')
-        have = False
-        new_man = str(message.chat.id)
-        if len(mans) > 1:
-            for i in range(0, len(mans) - 1):
-                man = str(mans[i].strip())
-                print(f'Проверяем {man} на совпадение с {new_man}')
-                if man == new_man:
-                    have = True
-                    break
-        if len(mans) == 1:
-            man = str(mans[0].strip())
-            print(f'Проверяем {man} на совпадение с {new_man}')
-            if man == new_man:
-                have = True
-        if have:
+        with lock:
+            file = open('send_disc.txt', 'r', encoding='UTF-8')
+            mans = file.readlines()
             file.close()
-            markup_cancel_send = types.ReplyKeyboardMarkup(row_width=2)
-            markup_cancel_send.add('Отписаться->скидки')
-            markup_cancel_send.add('Назад->')
-            menu_markup = 'markup_cancel_send'
-            bot.send_message(message.chat.id, 'вы уже подписаны, отписаться?', reply_markup=markup_cancel_send)
-        else:
-            bot.send_message(message.chat.id, 'Вы добавлены в список рассылки')
-            file.write(new_man + '\n')
-            file.close()
+            file = open('send_disc.txt', 'a', encoding='UTF-8')
+            have = False
+            new_man = str(message.chat.id)
+            print(f'длинна файла с рассылкой {len(mans)}')
+            if len(mans) > 0:
+                for i in range(0, len(mans)):
+                    man = str(mans[i].strip())
+                    print(f'Проверяем {man} на совпадение с {new_man}')
+                    if man == new_man:
+                        have = True
+                        break
+
+            if have:
+                file.close()
+                markup_cancel_send = types.ReplyKeyboardMarkup(row_width=2)
+                markup_cancel_send.add('Отписаться->скидки')
+                markup_cancel_send.add('Назад->')
+                menu_markup = 'markup_cancel_send'
+                bot.send_message(message.chat.id, 'вы уже подписаны, отписаться?', reply_markup=markup_cancel_send)
+            else:
+                bot.send_message(message.chat.id, 'Вы добавлены в список рассылки')
+                file.write(new_man + '\n')
+                file.close()
 
     elif message.text.lower() == 'отчёт->скидки' or message.text.lower() == 'отчет->скидки':  # Вывод отчёта по скидкам
-        f = open('Скидки.txt', 'r', encoding="utf-8")
-        a = f.read()
-        if len(a) != 0:
-            bot.send_message(message.chat.id, a)
-        else:
-            bot.send_message(message.chat.id, 'Отчёт пуст')
-        f.close()
+        with lock:
+            f = open('Скидки.txt', 'r', encoding="utf-8")
+            a = f.read()
+            f.close()
+            if len(a) != 0:
+                bot.send_message(message.chat.id, a)
+            else:
+                bot.send_message(message.chat.id, 'Отчёт пуст')
+
 
     elif message.text.lower() == 'отчёт->операции' or message.text.lower() == 'отчет->операции':  # Вывод отчёта по операциям
-        f = open('Операции.txt', 'r', encoding="utf-8")
-        a = f.read()
+        with lock:
+            f = open('Операции.txt', 'r', encoding="utf-8")
+            a = f.read()
+            f.close()
         if len(a) != 0:
             bot.send_message(message.chat.id, a)
         else:
             bot.send_message(message.chat.id, 'Отчёт пуст')
-        f.close()
+
 
 
 def send_new_alarm(message):
-    file = open('send_disc.txt', 'r', encoding='UTF-8')
-    mans = file.readlines()
+    with lock:
+        file = open('send_disc.txt', 'r', encoding='UTF-8')
+        mans = file.readlines()
+        file.close()
     for man in mans:
         manw = str(man).strip()
         bot.send_message(manw, message)
@@ -163,7 +168,7 @@ def send_func():
         try:
             print('запуск парсера')
             xml_work()
-            time.sleep(30)
+            time.sleep(int(config['settings']['delay']))
         except Exception as e:
             print(e)
         time.sleep(15)
@@ -177,27 +182,19 @@ def polling():
     time.sleep(15)
 
 
-@bot.message_handler(content_types=['document'])
-def handle_docs_photo(message):
-    try:
-        chat_id = message.chat.id
-        file_info = bot.get_file(message.document.file_id)
-        downloaded_file = bot.download_file(file_info.file_path)
-        src = str(message.document.file_name)
-        with open(src, 'wb') as new_file:
-            new_file.write(downloaded_file)
-            bot.reply_to(message, "Пожалуй, я сохраню это")
-    except Exception as e:
-        bot.reply_to(message, e)
-
-
 def xml_work():
     file = open('посл_скидка.txt', 'r', encoding='UTF-8')
     last_disc = file.read()
     file.close()
-    a = open('a/as1.bat').read()
+    addr = config['settings']['ip_addres']
+    port = config['settings']['port']
+    req = config['settings']['xml_request']
+    resp = config['settings']['xml_response']
+    log = config['settings']['log_rkeeper']
+    pasw = config['settings']['pass_rkeeper']
+    tem = f'xmltest.exe {addr}:{port} {req} {resp} / {log}:{pasw}'
     try:
-        subprocess.run(a, check=True, shell=True, cwd='a')
+        subprocess.run(tem, check=True, shell=True, cwd='a')
         print('Отчёт взят')
 
     except:
