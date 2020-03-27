@@ -55,8 +55,11 @@ def send_text(message):
         bot.send_message(message.chat.id, 'Gupye, vk.com/gupye, +79788781055')
 
     elif message.text.lower() == 'отчёт->сформировать':
-        xml_work()
-        bot.send_message(message.chat.id, 'Отчёт сформирован')
+        res = xml_work()
+        if res:
+            bot.send_message(message.chat.id, 'Отчёт сформирован')
+        else:
+            bot.send_message(message.chat.id, 'Не удалось сформировать')
 
     elif message.text.lower() == 'подписки на расслыки':  # Вывод меню для подписок
 
@@ -90,7 +93,6 @@ def send_text(message):
         file.close()
         if len(mans) > -1:
             for i in range(0, len(mans)):
-                print(f'проверяем {mans[i]} с {del_man}')
                 if del_man in str(mans[i]).strip():
                     del mans[i]
                     bot.send_message(message.chat.id, 'Вы отписались', reply_markup=markup_send_al)
@@ -109,11 +111,9 @@ def send_text(message):
             file = open('send_disc.txt', 'a', encoding='UTF-8')
             have = False
             new_man = str(message.chat.id)
-            print(f'длинна файла с рассылкой {len(mans)}')
             if len(mans) > 0:
                 for i in range(0, len(mans)):
                     man = str(mans[i].strip())
-                    print(f'Проверяем {man} на совпадение с {new_man}')
                     if man == new_man:
                         have = True
                         break
@@ -140,8 +140,9 @@ def send_text(message):
             else:
                 bot.send_message(message.chat.id, 'Отчёт пуст')
 
+    elif message.text.lower() == 'отчёт->операции' or message.text.lower() == 'отчет->операции':
+        # Вывод отчёта по операциям
 
-    elif message.text.lower() == 'отчёт->операции' or message.text.lower() == 'отчет->операции':  # Вывод отчёта по операциям
         with lock:
             f = open('Операции.txt', 'r', encoding="utf-8")
             a = f.read()
@@ -150,7 +151,6 @@ def send_text(message):
             bot.send_message(message.chat.id, a)
         else:
             bot.send_message(message.chat.id, 'Отчёт пуст')
-
 
 
 def send_new_alarm(message):
@@ -166,7 +166,6 @@ def send_new_alarm(message):
 def send_func():
     while True:
         try:
-            print('запуск парсера')
             xml_work()
             time.sleep(int(config['settings']['delay']))
         except Exception as e:
@@ -193,12 +192,12 @@ def xml_work():
     log = config['settings']['log_rkeeper']
     pasw = config['settings']['pass_rkeeper']
     tem = f'xmltest.exe {addr}:{port} {req} {resp} / {log}:{pasw}'
-    try:
-        subprocess.run(tem, check=True, shell=True, cwd='a')
-        print('Отчёт взят')
+    a = subprocess.run(tem, check=True, shell=True, cwd='a', stdout=subprocess.PIPE).stdout.decode(encoding='UTF-8')
+    if 'Succes' in a:
+        res = True
+    else:
+        res = False
 
-    except:
-        print('Не получилось взять отчёт')
     count = int(0)
     operation = str(open('a/response.xml', 'r', encoding="utf-8").read())
     a = open('Операции.txt', 'w', encoding="utf-8")
@@ -253,7 +252,7 @@ def xml_work():
         for st in sort_list:
             t.write(st)
     t.close()
-    print('отчёт сформирован')
+    return (res)
 
 
 p2 = threading.Thread(target=polling, args=())
