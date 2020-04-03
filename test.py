@@ -1,17 +1,27 @@
-import configparser
-import subprocess
-config = configparser.ConfigParser()  # создаём объекта парсера
-config.read("settings.ini")  # читаем конфиг
+from bs4 import BeautifulSoup
 
-addr = config['settings']['ip_addres']
-port = config['settings']['port']
-req = config['settings']['xml_request']
-resp = config['settings']['xml_response']
-log = config['settings']['log_rkeeper']
-pasw = config['settings']['pass_rkeeper']
-tem = f'xmltest.exe {addr}:{port} {req} {resp} / {log}:{pasw}'
-a = subprocess.run (tem, check=True, shell=True, cwd='a',stdout=subprocess.PIPE).stdout.decode(encoding='UTF-8')
-if 'Succes' in a:
-    print('Отчёт взят')
-else:
-    print('Не удалось взять отчёт')
+# from main import send_new_alarm
+import datetime
+
+time = str(datetime.datetime.now()).split('.')
+lim = 200
+file_op = str(open('a/response.xml', 'r', encoding="utf-8").read())
+file = open('выручка.txt', 'w', encoding="utf-8")
+soup = BeautifulSoup(file_op, 'lxml')
+summary = 0
+count = 0
+sums = soup.find_all('sum_all')
+for one_sum in sums:
+    if count == 0:
+        file.write('*****ОБЩАЯ ВЫРУЧКА*****' + '\n')
+    count = + 1
+    litr = one_sum.get('sum').split("'")
+    a = float(litr[0])
+    summary = summary + a
+count = 0
+if summary >= lim:
+    с = str(f'На {time} сумма выручки превысила {lim} рублей')
+    bet = 'рассылка_по_выручке.txt'
+    print('выручка')
+    # send_new_alarm(с, bet )
+file.write(str(summary))

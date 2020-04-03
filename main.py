@@ -1,11 +1,14 @@
 import configparser
+import datetime
+import subprocess
 import time
 import telebot
-from telebot import types
+from telebot import types, apihelper
 import threading
 from bs4 import BeautifulSoup
-import subprocess
 
+PROXY = 'socks5://127.0.0.1:9050'
+apihelper.proxy = {'https': PROXY}
 lock = threading.RLock()
 
 config = configparser.ConfigParser()  # создаём объекта парсера
@@ -20,6 +23,7 @@ markup_start.add('Пока')
 
 markup_send_al = types.ReplyKeyboardMarkup(row_width=2)
 markup_send_al.add('Подписки-> скидки')
+markup_send_al.add('Подписки-> выручка')
 markup_send_al.add('Назад->')
 
 
@@ -74,15 +78,61 @@ def send_text(message):
         elif menu_markup == 'markup_cancel_send':
             bot.send_message(message.chat.id, 'назад ', reply_markup=markup_send_al)
             menu_markup = 'markup_send_al'
+        elif menu_markup == 'markup_cancel_send_allmon':
+            bot.send_message(message.chat.id, 'назад ', reply_markup=markup_send_al)
+            menu_markup = 'markup_send_al'
 
     elif message.text.lower() == 'отчёт':  # Вывод меню для получения отчёта
         markup_report = types.ReplyKeyboardMarkup(row_width=2)
         markup_report.add('Отчёт->операции')
         markup_report.add('Отчёт->скидки')
+        markup_report.add('Отчёт->выручка')
+        markup_report.add('Отчёт->время начала работы')
         markup_report.add('Отчёт->сформировать')
         markup_report.add('Назад->')
         bot.send_message(message.chat.id, 'выберите тип отчёта', reply_markup=markup_report)
         menu_markup = 'markup_report'
+
+    elif message.text.lower() == 'отчёт->время начала работы':  # Вывод отчёта по времени начала работы
+        with lock:
+            f = open('Первая_операция.txt', 'r', encoding="utf-8")
+            a = f.read()
+            f.close()
+            if len(a) != 0:
+                bot.send_message(message.chat.id, f'Время начала работы {a}')
+            else:
+                bot.send_message(message.chat.id, 'Отчёт пуст')
+
+    elif message.text.lower() == 'отчёт->выручка':  # Вывод отчёта по выручке
+        with lock:
+            f = open('выручка.txt', 'r', encoding="utf-8")
+            a = f.read()
+            f.close()
+            if len(a) != 0:
+                bot.send_message(message.chat.id, a)
+            else:
+                bot.send_message(message.chat.id, 'Отчёт пуст')
+
+    elif message.text.lower() == 'отписаться-> выручка':
+        with lock:
+            file = open('рассылка_по_выручке.txt', 'r', encoding='UTF-8')
+            mans = file.readlines()
+            file.close()
+        del_man = str(message.chat.id)
+        file.close()
+        if len(mans) > -1:
+            for i in range(0, len(mans)):
+                if del_man in str(mans[i]).strip():
+                    del mans[i]
+                    bot.send_message(message.chat.id, 'Вы отписались', reply_markup=markup_send_al)
+                    break
+        with lock:
+            file = open('рассылка_по_выручке.txt', 'w', encoding='UTF-8')
+            for man in mans:
+                file.write(man)
+            file.close()
+
+
 
     elif message.text.lower() == 'отписаться->скидки':
         with lock:
@@ -103,6 +153,33 @@ def send_text(message):
                 file.write(man)
             file.close()
 
+    elif message.text.lower() == 'подписки-> выручка':
+        with lock:
+            file = open('рассылка_по_выручке.txt', 'r', encoding='UTF-8')
+            mans = file.readlines()
+            file.close()
+            file = open('рассылка_по_выручке.txt', 'a', encoding='UTF-8')
+            have = False
+            new_man = str(message.chat.id)
+            if len(mans) > 0:
+                for i in range(0, len(mans)):
+                    man = str(mans[i].strip())
+                    if man == new_man:
+                        have = True
+                        break
+
+            if have:
+                file.close()
+                markup_cancel_send_allmon = types.ReplyKeyboardMarkup(row_width=2)
+                markup_cancel_send_allmon.add('Отписаться-> выручка')
+                markup_cancel_send_allmon.add('Назад->')
+                menu_markup = 'markup_cancel_send_allmon'
+                bot.send_message(message.chat.id, 'Вы уже подписаны, отписаться?',
+                                 reply_markup=markup_cancel_send_allmon)
+            else:
+                bot.send_message(message.chat.id, 'Вы добавлены в список рассылки')
+                file.write(new_man + '\n')
+                file.close()
     elif message.text.lower() == 'подписки-> скидки':
         with lock:
             file = open('send_disc.txt', 'r', encoding='UTF-8')
@@ -153,9 +230,9 @@ def send_text(message):
             bot.send_message(message.chat.id, 'Отчёт пуст')
 
 
-def send_new_alarm(message):
+def send_new_alarm(message, send_name):
     with lock:
-        file = open('send_disc.txt', 'r', encoding='UTF-8')
+        file = open(send_name, 'r', encoding='UTF-8')
         mans = file.readlines()
         file.close()
     for man in mans:
@@ -197,24 +274,29 @@ def xml_work():
         res = True
     else:
         res = False
-
     count = int(0)
-    operation = str(open('a/response.xml', 'r', encoding="utf-8").read())
+    file_op = str(open('a/response.xml', 'r', encoding="utf-8").read())
     a = open('Операции.txt', 'w', encoding="utf-8")
-    soup = BeautifulSoup(operation, 'lxml')
+    soup = BeautifulSoup(file_op, 'lxml')
+
     operations = soup.find_all('row')
+    fop = []
     lists = []
     for operation in operations:
         if count == 0:
             a.write('*****ОПЕРАЦИИ*****' + '\n')
             count = + 1
-
+        alp = operation.get('datetime')
         if operation.get('datetime') != '':
             # print(operation.get('datetime'), operation.get('operation'), operation.get('operator'))
             c = str(
                 operation.get('datetime') + ' ' + operation.get('operation') + ' ' + operation.get('operator') + '\n')
             lists.append(c)
-
+        fop.append(alp)
+    first_op = sorted(fop)
+    first_op_file = open('Первая_операция.txt', 'w', encoding='UTF-8')
+    first_op_file.write(first_op[0])
+    first_op_file.close()
     sort_list = sorted(lists)
     if len(sort_list) != 0:
         for st in sort_list:
@@ -240,7 +322,8 @@ def xml_work():
             if last_disc == '':
                 last_disc = operation.get('datetime')
             elif last_disc < operation.get('datetime'):
-                send_new_alarm(c)
+                bet = 'send_disc.txt'
+                send_new_alarm(c, bet)
                 last_disc = operation.get('datetime')
                 print('последнее время', last_disc)
         lists.append(c)
@@ -252,7 +335,28 @@ def xml_work():
         for st in sort_list:
             t.write(st)
     t.close()
-    return (res)
+    time = str(datetime.datetime.now()).split('.')
+    lim = 200
+    file_op = str(open('a/response.xml', 'r', encoding="utf-8").read())
+    file = open('выручка.txt', 'w', encoding="utf-8")
+    soup = BeautifulSoup(file_op, 'lxml')
+    summary = 0
+    count = 0
+    sums = soup.find_all('sum_all')
+    for one_sum in sums:
+        if count == 0:
+            file.write('*****ОБЩАЯ ВЫРУЧКА*****' + '\n')
+        count = + 1
+        litr = one_sum.get('sum').split("'")
+        a = float(litr[0])
+        summary = summary + a
+    count = 0
+    if summary >= lim:
+        с = str(f'На {time[0]} сумма выручки превысила {lim} рублей')
+        bet = 'рассылка_по_выручке.txt'
+        send_new_alarm(с, bet)
+    file.write(str(summary))
+    return res
 
 
 p2 = threading.Thread(target=polling, args=())
