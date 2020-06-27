@@ -7,8 +7,8 @@ from telebot import types, apihelper
 import threading
 from bs4 import BeautifulSoup
 
-# PROXY = 'socks5://127.0.0.1:9050'
-# apihelper.proxy = {'https': PROXY}
+PROXY = 'socks5://127.0.0.1:9050'
+apihelper.proxy = {'https': PROXY}
 lock = threading.RLock()
 
 config = configparser.ConfigParser()  # создаём объекта парсера
